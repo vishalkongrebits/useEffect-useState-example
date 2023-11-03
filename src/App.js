@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import FirstComponent from './components/FirstComponent';
 import SecondComponent from './components/SecondComponent';
-import { useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 
 function App() {
 
@@ -10,6 +10,12 @@ function App() {
 
   const [mountFirst, setmountFirst] = useState(true)
   const [mountSecond, setmountSecond] = useState(false)
+
+  const [inputValue, setinputValue] = useState('')
+
+  const inputRef = useRef('')
+
+
 
   // console.log("App component rendered");
 
@@ -23,6 +29,24 @@ function App() {
     setmountFirst(false)
   }
 
+  const handleInput = useCallback((e) => {
+    setinputValue(e.target.value)
+  },[])
+
+  // console.log('inputValue',  inputRef.current.value)
+
+  // const handleInputRef = (e) => {
+  //   inputRef.current.value = e.target.value
+  // }
+
+  const firstComponentRenderer = useMemo(() => {
+    return(
+      <>
+      {mountFirst && <FirstComponent/>}
+      </>
+    )
+  },[])
+
 
   return (
     <div className="App">
@@ -34,13 +58,23 @@ function App() {
           <button onClick={() => setCounter(counter - 1)}>Decrement</button>
         </div>
 
-        {mountFirst && <FirstComponent/>}
-        {mountSecond && <SecondComponent/>}
+          {firstComponentRenderer}
 
-        <div>
+        <SecondComponent/>
+
+        {/* <div>
           <button onClick={handleMountFirst}>Toggle First Component</button>
           <button onClick={handleMountsecond}>Toggle Second Component</button>
-        </div>
+        </div> */}
+         {/* <h1>Input Text : {inputValue}</h1>
+
+         <h1>Input Text using ref : {inputRef.current.value}</h1>
+
+        <div>
+          <input type="text" ref={inputRef} value={inputValue} style={{height:50,width:300,fontSize:30}} onChange={handleInput} placeholder='Enter Text'/>
+        </div> */}
+
+
       
       </header>
     </div>
