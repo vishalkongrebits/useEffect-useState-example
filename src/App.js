@@ -3,6 +3,8 @@ import './App.css';
 import FirstComponent from './components/FirstComponent';
 import SecondComponent from './components/SecondComponent';
 import { useCallback, useMemo, useRef, useState } from 'react';
+import WithoutHooksForm from './components/WithoutHooksForm';
+import WithHooksForms from './components/WithHooksForms';
 
 function App() {
 
@@ -52,7 +54,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h1>Counter : {counter}</h1>
+        {/* <h1>Counter : {counter}</h1>
         <div>
           <button onClick={() => setCounter(counter + 1)}>Increment</button>
           <button onClick={() => setCounter(counter - 1)}>Decrement</button>
@@ -60,7 +62,7 @@ function App() {
 
           {firstComponentRenderer}
 
-        <SecondComponent/>
+        <SecondComponent/> */}
 
         {/* <div>
           <button onClick={handleMountFirst}>Toggle First Component</button>
@@ -74,7 +76,8 @@ function App() {
           <input type="text" ref={inputRef} value={inputValue} style={{height:50,width:300,fontSize:30}} onChange={handleInput} placeholder='Enter Text'/>
         </div> */}
 
-
+        {/* <WithoutHooksForm/> */}
+        <WithHooksForms/>
       
       </header>
     </div>
