@@ -6,82 +6,104 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 import WithoutHooksForm from './components/WithoutHooksForm';
 import WithHooksForms from './components/WithHooksForms';
 
-function App() {
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import FirstPage from './pages/FirstPage';
+import SecondPage from './pages/SecondPage';
+import NestedFirst from './pages/NestedFirst';
 
-  const [counter, setCounter] = useState(0)
+// function App() {
 
-  const [mountFirst, setmountFirst] = useState(true)
-  const [mountSecond, setmountSecond] = useState(false)
+//   const [counter, setCounter] = useState(0)
 
-  const [inputValue, setinputValue] = useState('')
+//   const [mountFirst, setmountFirst] = useState(true)
+//   const [mountSecond, setmountSecond] = useState(false)
 
-  const inputRef = useRef('')
+//   const [inputValue, setinputValue] = useState('')
 
-
-
-  // console.log("App component rendered");
-
-  const handleMountFirst = () => {
-    setmountSecond(false)
-    setmountFirst(true)
-  }
-
-  const handleMountsecond = () => {
-    setmountSecond(true)
-    setmountFirst(false)
-  }
-
-  const handleInput = useCallback((e) => {
-    setinputValue(e.target.value)
-  },[])
-
-  // console.log('inputValue',  inputRef.current.value)
-
-  // const handleInputRef = (e) => {
-  //   inputRef.current.value = e.target.value
-  // }
-
-  const firstComponentRenderer = useMemo(() => {
-    return(
-      <>
-      {mountFirst && <FirstComponent/>}
-      </>
-    )
-  },[])
+//   const inputRef = useRef('')
 
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        {/* <h1>Counter : {counter}</h1>
-        <div>
-          <button onClick={() => setCounter(counter + 1)}>Increment</button>
-          <button onClick={() => setCounter(counter - 1)}>Decrement</button>
-        </div>
 
-          {firstComponentRenderer}
+//   // console.log("App component rendered");
 
-        <SecondComponent/> */}
+//   const handleMountFirst = () => {
+//     setmountSecond(false)
+//     setmountFirst(true)
+//   }
 
-        {/* <div>
-          <button onClick={handleMountFirst}>Toggle First Component</button>
-          <button onClick={handleMountsecond}>Toggle Second Component</button>
-        </div> */}
-         {/* <h1>Input Text : {inputValue}</h1>
+//   const handleMountsecond = () => {
+//     setmountSecond(true)
+//     setmountFirst(false)
+//   }
 
-         <h1>Input Text using ref : {inputRef.current.value}</h1>
+//   const handleInput = useCallback((e) => {
+//     setinputValue(e.target.value)
+//   },[])
 
-        <div>
-          <input type="text" ref={inputRef} value={inputValue} style={{height:50,width:300,fontSize:30}} onChange={handleInput} placeholder='Enter Text'/>
-        </div> */}
+//   // console.log('inputValue',  inputRef.current.value)
 
-        {/* <WithoutHooksForm/> */}
-        <WithHooksForms/>
+//   // const handleInputRef = (e) => {
+//   //   inputRef.current.value = e.target.value
+//   // }
+
+//   const firstComponentRenderer = useMemo(() => {
+//     return(
+//       <>
+//       {mountFirst && <FirstComponent/>}
+//       </>
+//     )
+//   },[])
+
+
+//   return (
+//     <div className="App">
+//       <header className="App-header">
+//         <img src={logo} className="App-logo" alt="logo" />
+//         {/* <h1>Counter : {counter}</h1>
+//         <div>
+//           <button onClick={() => setCounter(counter + 1)}>Increment</button>
+//           <button onClick={() => setCounter(counter - 1)}>Decrement</button>
+//         </div>
+
+//           {firstComponentRenderer}
+
+//         <SecondComponent/> */}
+
+//         {/* <div>
+//           <button onClick={handleMountFirst}>Toggle First Component</button>
+//           <button onClick={handleMountsecond}>Toggle Second Component</button>
+//         </div> */}
+//          {/* <h1>Input Text : {inputValue}</h1>
+
+//          <h1>Input Text using ref : {inputRef.current.value}</h1>
+
+//         <div>
+//           <input type="text" ref={inputRef} value={inputValue} style={{height:50,width:300,fontSize:30}} onChange={handleInput} placeholder='Enter Text'/>
+//         </div> */}
+
+//         {/* <WithoutHooksForm/> */}
+//         <WithHooksForms/>
       
-      </header>
-    </div>
-  );
+//       </header>
+//     </div>
+//   );
+// }
+
+const App =()=>{
+  return(
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        {/* //nested Route below */}
+        <Route path='firstPage'  >  
+          <Route path='' index element={<FirstPage />} />
+          <Route path='nestedFirst/:id' element={<NestedFirst />} />
+        </Route>  
+        <Route path='/secondPage' element={<SecondPage />} />
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
 export default App;

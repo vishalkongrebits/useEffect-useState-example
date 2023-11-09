@@ -20,8 +20,8 @@ const WithHooksForms = () => {
             password:'',
             gender:''
         },
-        resolver: yupResolver(schema),
-        mode: 'all'
+        resolver: yupResolver(schema), // integrating validation schema
+        mode: 'all'    // validation mode to validate all fields at once
       });
 
       console.log('errors', errors);
