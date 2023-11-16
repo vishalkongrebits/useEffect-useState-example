@@ -1,16 +1,17 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
-import FirstComponent from './components/FirstComponent';
-import SecondComponent from './components/SecondComponent';
-import { useCallback, useMemo, useRef, useState } from 'react';
-import WithoutHooksForm from './components/WithoutHooksForm';
-import WithHooksForms from './components/WithHooksForms';
+// import FirstComponent from './components/FirstComponent';
+// import SecondComponent from './components/SecondComponent';
+// import { useCallback, useMemo, useRef, useState } from 'react';
+// import WithoutHooksForm from './components/WithoutHooksForm';
+// import WithHooksForms from './components/WithHooksForms';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import FirstPage from './pages/FirstPage';
 import SecondPage from './pages/SecondPage';
 import NestedFirst from './pages/NestedFirst';
+import { ErrorBoundary } from 'react-error-boundary';
 
 // function App() {
 
@@ -93,6 +94,7 @@ import NestedFirst from './pages/NestedFirst';
 const App =()=>{
   return(
     <BrowserRouter>
+    <ErrorBoundary fallback={<h1>something went wrong</h1>}>
       <Routes>
         <Route path='/' element={<Home />} />
         {/* //nested Route below */}
@@ -102,6 +104,7 @@ const App =()=>{
         </Route>  
         <Route path='/secondPage' element={<SecondPage />} />
       </Routes>
+      </ErrorBoundary>
     </BrowserRouter>
   )
 }

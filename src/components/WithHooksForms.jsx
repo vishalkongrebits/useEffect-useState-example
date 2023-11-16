@@ -3,8 +3,10 @@ import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup";
 
+export const STRING_REGEX = /^[A-Za-z\u2019\u0027\u2018 -]+$/;
+
 const schema = yup.object().shape({
-    firstName: yup.string().required('First name is required'),
+    firstName: yup.string().required('First name is required').matches(STRING_REGEX,'Numbers not allowed'),
     lastName: yup.string().required('Last name is required'),
     email: yup.string().email('Invalid email address').required('Email is required'),
     password: yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
